@@ -73,9 +73,7 @@ level four(0, 0, 0, "Level Four", "map2.txt", true);
 
 
 
-int main()
-
-{
+int main() {
 	sf::RenderWindow window(sf::VideoMode(600, 600), "PacMan"); //1920, 1080
 	StartMenu startMenu(window);
 
@@ -111,45 +109,41 @@ int main()
 
 		if (startMenu.isGameRunning()) {
 
-			one.playlevel(window, 1000);
+			one.playlevel(window, false, 2440);
+
+			if (one.GetState() == won) {
 			
-				if (one.GetState() == won){
+				two.playlevel(window, true, 2440);
 
-				two.playlevel(window,1000);
+				if (two.GetState() == won) {
 
-				if (two.GetState() == won)
+					three.playlevel(window, false, 3600);
 
-					three.playlevel(window,1000);
-				if (three.GetState() == won) {
+					if (three.GetState() == won) {
+						
+						four.playlevel(window, true, 2640);
 
-					four.playlevel(window, 1000);
+						if (three.GetState() != null) {
+							startMenu.returnToMenu(); file << startMenu.getUsername() << endl << one.getscore() + two.getscore() + three.getscore() + four.getscore() << endl;
+						}
+
+					}
+					else if (three.GetState() == lost) {
+						startMenu.returnToMenu(); file << startMenu.getUsername() << endl << one.getscore() + two.getscore() + three.getscore() + four.getscore() << endl;
+					}
+
 				}
-				else if (three.GetState() == lost) startMenu.returnToMenu();
-				
-				if (four.GetState() == won || four.GetState() == lost) {
-
-					startMenu.returnToMenu(); file << startMenu.getUsername() << endl << one.getscore() + two.getscore() + three.getscore() << endl;
-				}
-
 				else if (two.GetState() == lost) {
-
-					file << startMenu.getUsername() << endl << one.getscore() + two.getscore() + three.getscore() << endl;
-
-					startMenu.returnToMenu();
+					startMenu.returnToMenu(); file << startMenu.getUsername() << endl << one.getscore() + two.getscore() + three.getscore() + four.getscore() << endl;
 				}
+
+
+
+			}else if ( one.GetState() == lost )
+			{
+				startMenu.returnToMenu(); file << startMenu.getUsername() << endl << one.getscore() + two.getscore() + three.getscore() + four.getscore() << endl;
 			}
-
-			else if (one.GetState() == lost) {
-				startMenu.returnToMenu();
-
-				file << startMenu.getUsername() << endl << one.getscore() + two.getscore() + three.getscore() << endl;
-
-			}
-
-
-
-
-
+			
 		}
 
 		window.display();
